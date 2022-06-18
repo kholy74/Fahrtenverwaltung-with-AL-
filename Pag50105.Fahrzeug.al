@@ -50,11 +50,16 @@ page 50105 Fahrzeug
             }
             group(Abschreibung)
             {
+
                 field("Kaufpreis"; Kaufpreis)
                 {
                     ApplicationArea = All;
                 }
                 field("Kaufdatum"; Kaufdatum)
+                {
+                    ApplicationArea = All;
+                }
+                field("Afa-Methode"; "Afa-Methode")
                 {
                     ApplicationArea = All;
                 }
@@ -83,9 +88,34 @@ page 50105 Fahrzeug
                     Xmlport.Run(50112, false, true);
                 end;
             }
+            action("Restbuchwert berechnen")
+            {
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Image = CashReceiptJournal;
+                trigger OnAction()
+
+                begin
+
+                    case "Afa-Methode" of
+                        "Afa-Methode"::linear:
+                            AFA.Linear(Kennzeichen);
+                        "Afa-Methode"::degressiv:
+                            AFA.Degressiv(Kennzeichen);
+                        "Afa-Methode"::kombiniert:
+                            AFA.Kombiniert(Kennzeichen);
+                        "Afa-Methode"::leistungsabh:
+                            AFA."Leistungsabhängig"(Kennzeichen);
+                    end;
+
+                end;
+            }
         }
     }
 
     var
-        myInt: Integer;
+        "AFa-Methode": Option linear,degressiv,kombiniert,leistungsabh;
+        AFA: Codeunit Afa;
+
 }
