@@ -55,7 +55,7 @@ codeunit 50114 Afa
         Initialisierung(Kennzeichen);
         Restbuchwert := KFZ.Kaufpreis;
         Abschreibung := KFZ.Kaufpreis * 0.25;
-        Abschreibungssatz := 100 / Nutzungsdauer;
+
         while (Jahr < "Aktuelles Jahr") AND (Jahr < (Kaufjahr + Nutzungsdauer)) do begin
             Abschreibung := Restbuchwert * 0.25;
             Restbuchwert := Restbuchwert - Abschreibung;
