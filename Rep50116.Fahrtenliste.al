@@ -1,4 +1,4 @@
-report 50116 Fahrtenliste
+report 50116 "Fahrten liste"
 {
     UsageCategory = Administration;
     ApplicationArea = All;
